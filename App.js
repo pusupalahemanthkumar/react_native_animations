@@ -1,41 +1,59 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { Feather } from "@expo/vector-icons";
+
 import { MotiView } from "moti";
-import {Easing} from "react-native-reanimated";
+import { Easing } from "react-native-reanimated";
 
 // steps to do :
 // 1. npm install  react-native-reanimated
 // 2. npm install moti
 // 3. add this ` plugins: ['react-native-reanimated/plugin'], ` in babel.config.js file
-const _color = "#6E01EF";
-const _size = 100;
+
+const LoadingIndicator = ({ size }) => {
+  return (
+    <MotiView
+      from={{
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        borderWidth:0,
+        shadowOpacity:0.5,
+        // elevation:1,
+      }}
+      animate={{
+        width: size + 20,
+        height: size + 20,
+        borderRadius: (size + 20) / 2,
+        borderWidth: size/10,
+        shadowOpacity:1,
+        // elevation:5,
+      }}
+      transition={{
+        type: "timing",
+        duration: 1000,
+        repeat: Infinity, // or loop : true
+        // repeatReverse: false,
+      }}
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        borderWidth: size / 10,
+        borderColor: "#fff",
+        shadowColor: "#fff",
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        //  elevation:10,
+      }}
+    />
+  );
+};
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={[styles.dot, styles.center]}>
-        {[...Array(3).keys()].map((index) => {
-          return (
-            <MotiView
-              from={{ opacity: 0.5, scale: 1 }}
-              animate={{ opacity: 0, scale: 4 }}
-              transition={{
-                type:'timing',
-                duration:2000,
-                easing:Easing.out(Easing.ease),
-                repeatReverse:false, // true by default
-                delay: index*400,
-                loop:true,
-              }}
-              style={[StyleSheet.absoluteFillObject, styles.dot]}
-              key={index}
-            />
-          );
-        })}
-
-        <Feather name="phone-outgoing" size={32} color="#fff" />
-      </View>
+      <LoadingIndicator size={100} />
       <StatusBar style="auto" />
     </View>
   );
@@ -44,17 +62,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  dot: {
-    width: _size,
-    height: _size,
-    borderRadius: _size,
-    backgroundColor: _color,
-  },
-  center: {
+    backgroundColor: "#010100",
     alignItems: "center",
     justifyContent: "center",
   },
