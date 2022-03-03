@@ -1,6 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+// steps to do :
+// 1. npm install  react-native-reanimated
+// 2. npm install moti
+// 3. add this ` plugins: ['react-native-reanimated/plugin'], ` in babel.config.js file
+
 export default function App() {
   return (
     <View style={styles.container}>
